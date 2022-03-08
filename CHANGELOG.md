@@ -6,6 +6,10 @@
 
 - Added join and aggregate indexes for testing.
 
+### Breaking changes
+
+- Changed field name in model index configs from `type` to `index_type`. This will cause errors when using older models with indexes.
+
 ## v1.0.0
 
 - Jaffle Shop Firebolt now supports dbt 1.0!
