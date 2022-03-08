@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.1
+
+### Changes
+
+- Added join and aggregate indexes for testing.
+
 ## v1.0.0
 
 - Jaffle Shop Firebolt now supports dbt 1.0!
