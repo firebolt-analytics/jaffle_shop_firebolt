@@ -6,7 +6,7 @@
     indexes = [
       {
         'index_type': 'join',
-        'join_column': ['first_order', '']
+        'join_column': ['first_order', ''],
         'dimension_column': 'customer_id',
       }
     ]
