@@ -4,10 +4,10 @@ version: '0.1'
 profile: 'jaffle_shop'
 config-version: 2
 
-source-paths: ["models"]
+model-paths: ["models"]
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
-data-paths: ["data"]
+seed-paths: ["data"]
 macro-paths: ["macros"]
 
 target-path: "target"
@@ -27,9 +27,9 @@ models:
         +table_type: dimension
         +indexes: |
           {
-          'type': 'aggregating',
-          'key_column': 'order_id',
-          'aggregation': ['COUNT(DISTINCT status)', 'AVG(customer_id)']
+            'type': 'aggregating',
+            'key_column': 'order_id',
+            'aggregation': ['COUNT(DISTINCT status)', 'AVG(customer_id)']
           },
           {
             'type': 'aggregating',
@@ -44,7 +44,6 @@ models:
 seeds:
   +quote_columns: true
   jaffle_shop:
-    +pre-hook: "set firebolt_dont_wait_for_upload_to_s3=1" # WARNING: alpha feature
     +quote_columns: true
     raw_orders:
       +column_types:
