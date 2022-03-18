@@ -6,8 +6,8 @@
     indexes = [
       {
         'index_type': 'join',
-        'join_column': ['first_order', ''],
-        'dimension_column': 'customer_id',
+        'join_column': 'first_name',
+        'dimension_column': 'customer_id'
       }
     ]
   )
