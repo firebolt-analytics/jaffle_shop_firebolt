@@ -1,13 +1,13 @@
 {{
   config(
     materialized = 'table',
-    table_type = 'dimension',
+    table_type = 'fact',
     primary_index = 'customer_id',
     indexes = [
       {
-        'index_type': 'join',
-        'join_column': 'first_name',
-        'dimension_column': 'customer_id'
+        'index_type': 'aggregating',
+        'key_column': 'customer_id',
+        'aggregation': ['COUNT(DISTINCT most_recent_order)', 'SUM(customer_lifetime_value)']
       }
     ]
   )
