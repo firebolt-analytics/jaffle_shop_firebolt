@@ -1,13 +1,13 @@
 {{
   config(
     materialized = 'table',
-    table_type = 'dimension',
-    primary_index = 'order_id',
+    table_type = 'fact',
+    primary_index = ['customer_id'],
     indexes = [
       {
-        'index_type': 'join',
-        'join_column': 'order_id',
-        'dimension_column': ['customer_id', 'status'],
+        'index_type': 'aggregating',
+        'key_column': ['customer_id', 'order_id'],
+        'aggregation': ['SUM(credit_card_amount)', 'SUM(amount)']
       }
     ]
   )
