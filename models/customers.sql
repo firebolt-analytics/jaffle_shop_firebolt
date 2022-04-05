@@ -2,8 +2,15 @@
   config(
     materialized = 'table',
     table_type = 'dimension',
-    primary_index = 'customer_id'
-    )
+    primary_index = 'customer_id',
+    indexes = [
+      {
+        'index_type': 'join',
+        'join_column': 'first_name',
+        'dimension_column': 'customer_id'
+      }
+    ]
+  )
 }}
 
 with customers as (
