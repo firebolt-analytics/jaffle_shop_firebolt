@@ -1,12 +1,12 @@
 {{
   config(
-    materialized = 'table',
+    materialized = 'incremental',
     table_type = 'dimension',
     primary_index = 'customer_id',
     indexes = [
       {
         'index_type': 'join',
-        'join_column': 'first_name',
+        'join_columns': 'first_name',
         'dimension_column': 'customer_id'
       }
     ]
@@ -48,7 +48,8 @@ final as (
         customer_orders.first_order,
         customer_orders.most_recent_order,
         customer_orders.number_of_orders,
-        customer_payments.total_amount as customer_lifetime_value
+        customer_payments.total_amount as customer_lifetime_value,
+        NULL as new_field
     from customers
     left join customer_orders
         on customers.customer_id = customer_orders.customer_id

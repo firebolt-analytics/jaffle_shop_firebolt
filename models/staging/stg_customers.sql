@@ -13,8 +13,8 @@ WITH source AS (
     our data in this project
     #}
     SELECT * FROM {{ source('s3', 'raw_customers') }}
+    {%- if is_incremental() %}
 
-    {%- if is_incremental() -%}
       -- this filter will only be applied on an incremental run
       WHERE id > (SELECT MAX(customer_id) FROM {{ this }})
     {%- endif -%}
@@ -23,7 +23,9 @@ renamed AS (
     SELECT
         id AS customer_id,
         first_name,
-        last_name
+        last_name,
+        NULL AS test_name,
+        1 AS test_id
     FROM source
 )
 

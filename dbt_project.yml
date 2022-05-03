@@ -21,6 +21,7 @@ dispatch:
     search_order: ['dbt', 'dbt_external_tables']
 
 models:
+  +on_schema_change: "fail"
   jaffle_shop:
       materialized: table
       staging:

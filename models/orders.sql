@@ -6,7 +6,7 @@
     indexes = [
       {
         'index_type': 'aggregating',
-        'key_column': ['customer_id', 'order_id'],
+        'key_columns': ['customer_id', 'order_id'],
         'aggregation': ['SUM(credit_card_amount)', 'SUM(amount)']
       }
     ]
