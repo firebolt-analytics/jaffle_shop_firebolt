@@ -3,6 +3,7 @@
     materialized = 'incremental',
     table_type = 'fact',
     incremental_strategy='append',
+    partition_by = 'first_name',
     primary_index='customer_id'
   )
 }}
@@ -23,9 +24,7 @@ renamed AS (
     SELECT
         id AS customer_id,
         first_name,
-        last_name,
-        NULL AS test_name,
-        1 AS test_id
+        last_name
     FROM source
 )
 

@@ -1,6 +1,6 @@
 {{
   config(
-    materialized = 'table',
+    materialized = 'incremental',
     table_type = 'fact',
     primary_index = ['customer_id'],
     indexes = [
@@ -9,7 +9,9 @@
         'key_columns': ['customer_id', 'order_id'],
         'aggregation': ['SUM(credit_card_amount)', 'SUM(amount)']
       }
-    ]
+    ],
+    incremental_strategy = 'append',
+    partition_by = 'status'
   )
 }}
 

@@ -3,7 +3,8 @@
     table_type = 'dimension',
     primary_index = 'order_id',
     materialized = 'incremental',
-    incremental_strategy='append'
+    incremental_strategy = 'insert_overwrite',
+    partition_by = ['customer_id', 'status']
     )
 }}
 
@@ -15,7 +16,7 @@ with source as (
     #}
     select * from {{ ref('raw_orders') }}
     {% if is_incremental() %}
-       where order_date > (select max(order_date) from {{ this }})
+       where order_date > (select max(order_date)-3 from {{ this }})
     {% endif %}
 ),
 renamed as (
