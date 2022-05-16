@@ -16,7 +16,7 @@ with source as (
     #}
     select * from {{ ref('raw_orders') }}
     {% if is_incremental() %}
-       where order_date > (select max(order_date)-3 from {{ this }})
+       where order_date > (select cast(max(order_date) AS DATE)-3 from {{ this }})
     {% endif %}
 ),
 renamed as (

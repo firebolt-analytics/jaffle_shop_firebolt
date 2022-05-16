@@ -17,7 +17,7 @@ WITH source AS (
     {%- if is_incremental() %}
 
       -- this filter will only be applied on an incremental run
-      WHERE id > (SELECT MAX(customer_id) FROM {{ this }})
+      WHERE id > (SELECT MAX(customer_id)-5 FROM {{ this }})
     {%- endif -%}
 ),
 renamed AS (
