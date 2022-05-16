@@ -4,7 +4,6 @@
     primary_index = 'order_id',
     materialized = 'incremental',
     incremental_strategy = 'insert_overwrite',
-    partition_by = ['customer_id', 'status'],
     partitions = [[89, "placed"], [41, 'placed'], [85, 'placed']]
   )
 }}
