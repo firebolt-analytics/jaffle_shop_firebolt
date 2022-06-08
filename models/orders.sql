@@ -11,7 +11,6 @@
       }
     ],
     incremental_strategy = 'append',
-    partition_by = 'status'
   )
 }}
 

@@ -2,8 +2,8 @@
   config(
     materialized = 'incremental',
     table_type = 'fact',
-    incremental_strategy='append',
-    partition_by = 'first_name',
+    incremental_strategy='insert_overwrite',
+    partition_by = ['first_name', 'last_name'],
     primary_index='customer_id'
   )
 }}
@@ -16,7 +16,7 @@ WITH source AS (
   SELECT * FROM {{ source('s3', 'raw_customers') }}
   {%- if is_incremental() %}
     -- this filter will only be applied on an incremental run
-    WHERE id > (SELECT MAX(customer_id)-5 FROM {{ this }})
+    WHERE id > (SELECT MAX(customer_id)-23 FROM {{ this }})
   {%- endif -%}
 ),
 renamed AS (
