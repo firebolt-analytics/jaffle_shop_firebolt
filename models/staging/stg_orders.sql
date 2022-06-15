@@ -1,6 +1,5 @@
 {{
   config(
-<<<<<<< HEAD
     table_type = 'incremental',
     primary_index = 'order_id',
     materialized = 'ephemeral',
