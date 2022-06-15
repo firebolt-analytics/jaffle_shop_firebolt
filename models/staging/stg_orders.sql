@@ -4,7 +4,7 @@
     primary_index = 'order_id',
     materialized = 'ephemeral',
     incremental_strategy = 'insert_overwrite',
-    partition_by = ['order_date'],
+    partition_by = ['EXTRACT(MONTH FROM order_date)'],
    )
 }}
 

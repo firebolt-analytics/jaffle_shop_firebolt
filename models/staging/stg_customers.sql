@@ -3,7 +3,6 @@
     materialized = 'incremental',
     table_type = 'fact',
     incremental_strategy='insert_overwrite',
-    partition_by = ['first_name', 'last_name'],
     primary_index='customer_id'
   )
 }}
