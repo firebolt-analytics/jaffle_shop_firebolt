@@ -1,13 +1,14 @@
-
 name: 'jaffle_shop'
-version: '0.21.9'
-profile: 'jaffle_shop'
+
 config-version: 2
+version: '0.1'
+
+profile: 'jaffle_shop'
 
 model-paths: ["models"]
-analysis-paths: ["analysis"]
+seed-paths: ["seeds"]
 test-paths: ["tests"]
-seed-paths: ["data"]
+analysis-paths: ["analysis"]
 macro-paths: ["macros"]
 
 target-path: "target"
@@ -19,6 +20,8 @@ clean-targets:
 dispatch:
   - macro_namespace: dbt_external_tables
     search_order: ['dbt', 'dbt_external_tables']
+
+require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
   jaffle_shop:
