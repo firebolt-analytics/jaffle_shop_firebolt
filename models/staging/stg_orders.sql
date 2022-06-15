@@ -1,29 +1,30 @@
 {{
   config(
-    table_type = 'dimension',
+    table_type = 'incremental',
     primary_index = 'order_id',
-    materialized = 'incremental',
-    incremental_strategy='append'
-    )
+    materialized = 'ephemeral',
+    incremental_strategy = 'insert_overwrite',
+    partition_by = ['EXTRACT(MONTH FROM order_date)'],
+   )
 }}
 
 
-with source as (
-    {#-
-    Normally we would select from the table here, but we are using seeds to load
-    our data in this project
-    #}
-    select * from {{ ref('raw_orders') }}
-    {% if is_incremental() %}
-       where order_date > (select max(order_date) from {{ this }})
-    {% endif %}
+WITH source AS (
+  {#-
+  Normally we would select from the table here, but we are using seeds to load
+  our data in this project
+  -#}
+  SELECT * FROM {{ ref('raw_orders') }}
+  {%- if is_incremental() %}
+     WHERE order_date > (SELECT CAST(MAX(order_date) AS DATE)-13 FROM {{ this }})
+  {%- endif %}
 ),
-renamed as (
-    select
-        id as order_id,
-        user_id as customer_id,
-        order_date,
-        status
-    from source
+renamed AS (
+  SELECT
+      id AS order_id,
+      user_id AS customer_id,
+      order_date,
+      status
+  FROM source
 )
-select * from renamed
+SELECT * FROM renamed
