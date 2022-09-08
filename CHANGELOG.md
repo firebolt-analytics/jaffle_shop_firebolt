@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.2
+
+### Changes
+
+- customers model is now `insert_overwrite` incremental materialization.
+- orders model is now `append` incremental materialization.
+
 ## v1.0.1
 
 ### Changes
