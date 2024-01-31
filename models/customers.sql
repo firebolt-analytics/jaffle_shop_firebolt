@@ -5,13 +5,6 @@
     partition_by = 'first_order',
     table_type = 'dimension',
     primary_index = 'customer_id',
-    indexes = [
-      {
-        'index_type': 'join',
-        'join_columns': 'first_name',
-        'dimension_column': 'customer_id'
-      }
-    ]
   )
 }}
 
@@ -58,7 +51,7 @@ final AS (
          ON customers.customer_id = customer_payments.customer_id
   -- this filter will only be applied on an incremental run
   {%- if is_incremental() %}
-  WHERE first_order > (SELECT CAST(MAX(first_order) AS DATE)-23 FROM {{ this }})
+  WHERE CAST(first_order AS DATE) > (SELECT CAST(MAX(first_order) AS DATE)-23 FROM {{ this }})
   {%- endif %}
 )
 
