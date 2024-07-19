@@ -7,7 +7,7 @@ sources:
         external:
           url: 's3://firebolt-publishing-public/samples/dbt/'
           object_pattern: '*raw_customers.csv'
-          type: '(CSV SKIP_HEADER_ROWS=1)'
+          type: '(CSV SKIP_HEADER_ROWS=true)'
         columns:
           - name: id
             data_type: int
