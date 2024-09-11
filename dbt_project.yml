@@ -34,6 +34,3 @@ seeds:
   +quote_columns: true
   jaffle_shop:
     +quote_columns: true
-    raw_orders:
-      +column_types:
-        order_date: TEXT
